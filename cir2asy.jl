@@ -11,4 +11,4 @@ end
 
 Node(m::RegexMatch) = Node(parse(Int, m[:node_id]), m[:net], m[:node_name])
 
-nodes = map(ln -> match(rNodes, ln), lines) |> filter(!isnothing) .|> Node
+nodes = match.(rNodes, lines) |> filter(!isnothing) .|> Node
