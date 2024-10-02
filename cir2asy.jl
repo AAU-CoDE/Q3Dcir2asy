@@ -12,4 +12,4 @@ lines = readlines("test/parallel_conductors.cir")
 nodes = match.(rNodes, lines) |> filter(!isnothing) .|> Node
 
 nNodes = length(nodes)
-nodeXY(id) = -32, 32id - 16*(nNodes-1)
+nodeXY(id) = -32, 32*(id-1) - 16*(nNodes-1)
