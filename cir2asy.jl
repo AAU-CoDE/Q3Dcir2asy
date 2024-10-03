@@ -15,4 +15,4 @@ nodes = match.(rNodes, lines) |> filter(!isnothing) .|> Node
 nNodes = length(nodes)
 nodeXY(id) = (x = -32, y = 32*(id-1) - 16*(nNodes-1))
 
-window = (bottom = nodeXY(first(nodes).id).y - 8, top = nodeXY(last(nodes).id).y + 8)
+window = (bottom = nodeXY(first(nodes).id).y - 16, top = nodeXY(last(nodes).id).y + 16)
