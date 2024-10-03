@@ -19,3 +19,6 @@ window = (bottom = nodeXY(first(nodes).id).y - 16, top = nodeXY(last(nodes).id).
 
 rSubcktName = r"^\*\s*Topckt:\s*(?P<name>.+)"
 subcktName = match.(rSubcktName, lines) |> filter(!isnothing) |> first |> m -> m[:name]
+
+fNameSubckt = splitpath(fName) |> last
+fNameSymbol = replace(fName, r"cir$" => "asy")
