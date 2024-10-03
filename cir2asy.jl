@@ -1,8 +1,8 @@
 
 struct Node
-    node_id::Int
+    id::Int
     net::String
-    node_name::String
+    name::String
 end
 Node(m::RegexMatch) = Node(parse(Int, m[:node_id]), m[:net], m[:node_name])
 
