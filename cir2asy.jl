@@ -22,3 +22,30 @@ subcktName = match.(rSubcktName, lines) |> filter(!isnothing) |> first |> m -> m
 
 fNameSubckt = splitpath(fName) |> last
 fNameSymbol = replace(fName, r"cir$" => "asy")
+
+header = """
+Version 4
+SymbolType BLOCK
+RECTANGLE Normal -32 $(window.bottom) 32 $(window.top)
+WINDOW 0 0 $(window.bottom) Bottom 2
+WINDOW 3 0 $(window.top) Top 2
+SYMATTR Prefix X
+SYMATTR Value $subcktName
+SYMATTR ModelFile $fNameSubckt
+"""
+
+open(fNameSymbol, "w") do f
+    write(f, header)
+
+    for n in nodes
+        nx = string(nodeXY(n.id).x)
+        ny = string(nodeXY(n.id).y)
+        string(nodeXY(n.id).x)
+        pinString = """
+        PIN $nx $ny LEFT 8
+        PINATTR PinName $(n.name)
+        PINATTR SpiceOrder $(n.id)
+        """
+        write(f, pinString)
+    end
+end
