@@ -8,7 +8,7 @@ end
 Node(m::RegexMatch) = Node(parse(Int, m[:node_id]), m[:net], m[:node_name])
 
 function cir2asy(fName)
-    rNodes = r"^\* node (?P<node_id>\d+)+\s+(?P<net>[\w]+):(?P<node_name>[\w]+)"
+    rNodes = r"^\* node (?P<node_id>\d+)+\s+(?P<net>.+):(?P<node_name>.+)"
 
     lines = readlines(fName)
     nodes = match.(rNodes, lines) |> filter(!isnothing) .|> Node
