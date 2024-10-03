@@ -14,9 +14,15 @@ function cir2asy(fName)
     nodes = match.(rNodes, lines) |> filter(!isnothing) .|> Node
 
     nNodes = length(nodes)
-    nodeXY(id) = (x=-32, y=32 * (id - 1) - 16 * (nNodes - 1))
+    longestName = getfield.(nodes, :name) .|> length |> maximum
 
-    window = (bottom=nodeXY(first(nodes).id).y - 16, top=nodeXY(last(nodes).id).y + 16)
+    nodeXY(id) = (x=-8longestName - 16, y=32 * (id - 1) - 16 * (nNodes - 1))
+
+    window = (
+        bottom=nodeXY(first(nodes).id).y - 16,
+        top=nodeXY(last(nodes).id).y + 16,
+        left=nodeXY(nodes[1].id).x,
+        right=-nodeXY(nodes[1].id).x)
 
     rSubcktName = r"^\*\s*Topckt:\s*(?P<name>.+)"
     subcktName = match.(rSubcktName, lines) |> filter(!isnothing) |> first |> m -> m[:name]
@@ -27,7 +33,7 @@ function cir2asy(fName)
     header = """
     Version 4
     SymbolType BLOCK
-    RECTANGLE Normal -32 $(window.bottom) 32 $(window.top)
+    RECTANGLE Normal $(window.left) $(window.bottom) $(window.right) $(window.top)
     WINDOW 0 0 $(window.bottom) Bottom 2
     WINDOW 3 0 $(window.top) Top 2
     SYMATTR Prefix X
