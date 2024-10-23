@@ -5,7 +5,7 @@ WINDOW 0 0 -40 Bottom 2
 WINDOW 3 0 40 Top 2
 SYMATTR Prefix X
 SYMATTR Value parallel_conductors
-SYMATTR ModelFile /Users/sbe/Desktop/Q3Dcir2asy/test/parallel_conductors.cir
+SYMATTR ModelFile parallel_conductors.cir
 PIN -32 -16 LEFT 8
 PINATTR PinName 1
 PINATTR SpiceOrder 1
